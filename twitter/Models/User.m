@@ -18,6 +18,7 @@
         self.profilePicture = dictionary[@"profile_image_url_https"];
         
     // Initialize any other properties
+        
     }
     return self;
 }

@@ -95,18 +95,22 @@
     cell.tweetText.text = (tweet.text);
     cell.tweetText.font = [cell.tweetText.font fontWithSize:12];
     
+    cell.tweetUsername.text = [@"@" stringByAppendingString: tweet.user.screenName];
+    cell.tweetUsername.font = [cell.tweetText.font fontWithSize:12];
+    
     [cell.tweetPhoto setImageWithURL:url ];
+    cell.tweetPhoto.layer.cornerRadius = cell.tweetPhoto.frame.size.height /2;
+    cell.tweetPhoto.layer.masksToBounds = YES;
+    cell.tweetPhoto.layer.borderWidth = 0;
     
 //    [cell.tweetPhoto setImage:(NS *) urlData];
 
-    self.tableView.rowHeight = 180;
+//    self.tableView.rowHeight = 150;
     
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//
     return self.arrayOfTweets.count;
-//    return 20;
 }
 @end

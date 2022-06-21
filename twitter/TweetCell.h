@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIImageView *tweetPhoto;
 @property (weak, nonatomic) IBOutlet UILabel *tweetName;
 @property (weak, nonatomic) IBOutlet UILabel *tweetText;
+@property (weak, nonatomic) IBOutlet UILabel *tweetUsername;
+
+
 @property Tweet *tweet;
 @end
 
