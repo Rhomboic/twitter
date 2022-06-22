@@ -14,6 +14,14 @@
     [super awakeFromNib];
     // Initialization code
 }
+- (IBAction)didTapFavorite:(id)sender {
+    self.tweet.favorited = YES;
+    self.tweet.favoriteCount += 1;
+    
+    UIImage *favorIconRed = [UIImage imageNamed: @"favor-icon-red"];
+    [self.likeButton setImage:favorIconRed forState:UIControlStateNormal];
+//    self.likeCount += 1;
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

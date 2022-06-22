@@ -12,8 +12,9 @@
 #import "LoginViewController.h"
 #import "TweetCell.h"
 #import "UIImageView+AFNetworking.h"
+#import "ComposeViewController.h"
 
-@interface TimelineViewController () <UITableViewDataSource>
+@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property NSMutableArray *arrayOfTweets;
@@ -68,15 +69,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    UINavigationController *navigationController = [segue destinationViewController];
+        ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+        composeController.delegate = self;
+    
 }
-*/
+
 
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -95,7 +94,7 @@
     cell.tweetText.text = (tweet.text);
     cell.tweetText.font = [cell.tweetText.font fontWithSize:12];
     
-    cell.tweetUsername.text = [@"@" stringByAppendingString: tweet.user.screenName];
+    cell.tweetUsername.text = [@"  .@" stringByAppendingString: tweet.user.screenName];
     cell.tweetUsername.font = [cell.tweetText.font fontWithSize:12];
     
     [cell.tweetPhoto setImageWithURL:url ];
@@ -103,9 +102,15 @@
     cell.tweetPhoto.layer.masksToBounds = YES;
     cell.tweetPhoto.layer.borderWidth = 0;
     
-//    [cell.tweetPhoto setImage:(NS *) urlData];
-
-//    self.tableView.rowHeight = 150;
+    cell.likeCount.text = [NSString stringWithFormat:@"%i", tweet.favoriteCount];
+    cell.likeCount.font = [cell.likeCount.font fontWithSize:12];
+    cell.retweetCount.text = [NSString stringWithFormat:@"%i", tweet.retweetCount];
+    cell.retweetCount.font = [cell.retweetCount.font fontWithSize:12];
+//    return cell;
+    cell.replyCount.text = [NSString stringWithFormat:@"%i", tweet.replyCount];
+    cell.replyCount.font = [cell.replyCount.font fontWithSize:12];
+    cell.tweetDate.text = tweet.createdAtString;
+    cell.tweetDate.font = [cell.tweetDate.font fontWithSize:12];
     
     return cell;
 }
@@ -113,4 +118,10 @@
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.arrayOfTweets.count;
 }
+- (void)didTweet:(nonnull Tweet *)tweet {
+    [self.arrayOfTweets addObject:tweet];
+    
+    [self.tableView reloadData];
+}
+
 @end
