@@ -94,7 +94,7 @@
     cell.tweetText.text = (tweet.text);
     cell.tweetText.font = [cell.tweetText.font fontWithSize:12];
     
-    cell.tweetUsername.text = [@"  .@" stringByAppendingString: tweet.user.screenName];
+    cell.tweetUsername.text = [@"@" stringByAppendingString: tweet.user.screenName];
     cell.tweetUsername.font = [cell.tweetText.font fontWithSize:12];
     
     [cell.tweetPhoto setImageWithURL:url ];
@@ -109,7 +109,7 @@
 //    return cell;
     cell.replyCount.text = [NSString stringWithFormat:@"%i", tweet.replyCount];
     cell.replyCount.font = [cell.replyCount.font fontWithSize:12];
-    cell.tweetDate.text = tweet.createdAtString;
+    cell.tweetDate.text = [@"." stringByAppendingString:tweet.createdAtString];
     cell.tweetDate.font = [cell.tweetDate.font fontWithSize:12];
     
     return cell;
