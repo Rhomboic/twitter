@@ -252,16 +252,21 @@
         <scene sceneID="Lo5-EA-fvK">
             <objects>
                 <viewController id="Hkg-Or-prM" customClass="ComposeViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="WHR-gI-9pK">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="WHR-gI-9pK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="UkV-FO-8Fw">
-                                <rect key="frame" x="63" y="53" width="320" height="294"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="UkV-FO-8Fw">
+                                <rect key="frame" x="63" y="53" width="312" height="294"/>
+                                <color key="backgroundColor" systemColor="secondarySystemFillColor"/>
+                                <gestureRecognizers/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="UaY-dm-guc" appends="YES" id="qij-z1-kOX"/>
+                                    <outletCollection property="gestureRecognizers" destination="UaY-dm-guc" appends="YES" id="ndD-9G-psB"/>
+                                </connections>
                             </textView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lhx-uQ-1bI">
                                 <rect key="frame" x="8" y="64" width="50" height="85"/>
@@ -277,6 +282,7 @@
                             <constraint firstItem="lhx-uQ-1bI" firstAttribute="leading" secondItem="eUK-42-65y" secondAttribute="leading" constant="8" id="3KC-v0-8sr"/>
                             <constraint firstItem="eUK-42-65y" firstAttribute="bottom" secondItem="UkV-FO-8Fw" secondAttribute="bottom" constant="300" id="PD4-r4-nDY"/>
                             <constraint firstItem="UkV-FO-8Fw" firstAttribute="trailing" secondItem="eUK-42-65y" secondAttribute="trailing" constant="8" id="WtV-r2-nEI"/>
+                            <constraint firstItem="UkV-FO-8Fw" firstAttribute="height" secondItem="WHR-gI-9pK" secondAttribute="height" multiplier="0.5" id="enq-q1-Clt"/>
                             <constraint firstItem="UkV-FO-8Fw" firstAttribute="top" secondItem="WHR-gI-9pK" secondAttribute="top" constant="53" id="vPa-K8-OBy"/>
                             <constraint firstItem="UkV-FO-8Fw" firstAttribute="leading" secondItem="lhx-uQ-1bI" secondAttribute="trailing" constant="5" id="xWZ-JU-0Qf"/>
                         </constraints>
@@ -299,6 +305,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Dh-fJ-BMa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="UaY-dm-guc">
+                    <connections>
+                        <action selector="textViewActive:" destination="Hkg-Or-prM" id="31v-iF-xXz"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3093.5999999999999" y="35.532233883058474"/>
         </scene>
@@ -349,6 +360,9 @@
         <image name="retweet-icon" width="30" height="30"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="secondarySystemFillColor">
+            <color red="0.47058823529411764" green="0.47058823529411764" blue="0.50196078431372548" alpha="0.16" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

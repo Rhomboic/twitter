@@ -88,6 +88,8 @@
     NSURL *url = [NSURL URLWithString:URLString];
 //    NSData *urlData = [NSData dataWithContentsOfURL:url];
     
+    cell.tweet = tweet;
+    
     cell.tweetName.text = (tweet.user.name);
     cell.tweetName.font = [cell.tweetName.font fontWithSize:14];
     

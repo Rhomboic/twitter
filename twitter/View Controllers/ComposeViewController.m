@@ -19,6 +19,10 @@
 @end
 
 @implementation ComposeViewController
+- (IBAction)textViewActive:(id)sender {
+    [self textViewDidChange:_composeTextView];
+    [self textViewDidEndEditing:_composeTextView];
+}
 - (IBAction)tweetButton:(UIBarButtonItem *)sender {
     [[APIManager shared]postStatusWithText: self.composeTextView.text completion:^(Tweet *tweet, NSError *error) {
         if(error){
@@ -48,8 +52,9 @@
     
     
 //    [_userPhoto setImageWithURL: ];
-    
-    [_composeTextView addSubview:_placeholderLabel];
+    [self textViewDidChange:_composeTextView];
+    [self textViewDidEndEditing:_composeTextView];
+//    [_composeTextView addSubview:_placeholderLabel];
 }
 
 - (void) textViewDidChange:(UITextView *)theTextView
