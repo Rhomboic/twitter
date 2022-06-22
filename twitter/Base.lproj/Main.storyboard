@@ -109,6 +109,9 @@
                                                     <rect key="frame" x="136" y="91" width="54" height="44"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="retweet-icon" title=""/>
+                                                    <connections>
+                                                        <action selector="didTapRetweet:" destination="VS5-FE-rlZ" eventType="touchUpInside" id="Nyf-8a-pmM"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4sH-On-Mdd">
                                                     <rect key="frame" x="287" y="91" width="54" height="44"/>

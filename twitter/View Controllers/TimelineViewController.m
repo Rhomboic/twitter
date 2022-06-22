@@ -50,10 +50,10 @@
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
             NSLog(@"😎😎 Successfully loaded home timeline");
-            for (Tweet *dictionary in tweets) {
-                NSLog(@"%@", dictionary.user.name);
-                
-            }
+//            for (Tweet *dictionary in tweets) {
+//                NSLog(@"%@", dictionary.user.name);
+//                
+//            }
             
             self.arrayOfTweets = (NSMutableArray *) tweets;
             [self.tableView reloadData];
