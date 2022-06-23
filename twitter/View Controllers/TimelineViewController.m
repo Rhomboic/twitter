@@ -13,8 +13,12 @@
 #import "TweetCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "ComposeViewController.h"
+#import "DateTools.h"
+#import "DetailsViewController.h"
+#import "TweetCell.h"
 
-@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+
+@interface TimelineViewController () <ComposeViewControllerDelegate,UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property NSMutableArray *arrayOfTweets;
@@ -29,15 +33,13 @@
     appDelegate.window.rootViewController = loginViewController;
     [[APIManager shared] logout];
 }
-
+- (void) viewWillAppear:(BOOL)animated {
+    [self fetchTweets];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.dataSource = self;
-    
-    
-    // Get timeline
-    [self fetchTweets];
-//    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    [self.refreshControl beginRefreshing];
     
     
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -70,49 +72,37 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"composeSegue"]) {
     UINavigationController *navigationController = [segue destinationViewController];
         ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
         composeController.delegate = self;
-    
+    } else {
+    UITableViewCell *cell = sender;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+//    UINavigationController *navigationController = [segue destinationViewController];
+    DetailsViewController *detailsController = [segue destinationViewController];
+    detailsController.tweet = self.arrayOfTweets[indexPath.row];
+    }
 }
 
 
-
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    
+//}
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell" forIndexPath:indexPath];
 //    UITableViewCell *cell = [[UITableViewCell alloc] init];
     
     Tweet *tweet = self.arrayOfTweets[indexPath.row];
 
-    NSString *URLString = tweet.user.profilePicture;
-    NSURL *url = [NSURL URLWithString:URLString];
+    
 //    NSData *urlData = [NSData dataWithContentsOfURL:url];
     
     cell.tweet = tweet;
     
-    cell.tweetName.text = (tweet.user.name);
-    cell.tweetName.font = [cell.tweetName.font fontWithSize:14];
+    [cell refreshTweet];
     
-    cell.tweetText.text = (tweet.text);
-    cell.tweetText.font = [cell.tweetText.font fontWithSize:12];
     
-    cell.tweetUsername.text = [@"@" stringByAppendingString: tweet.user.screenName];
-    cell.tweetUsername.font = [cell.tweetText.font fontWithSize:12];
-    
-    [cell.tweetPhoto setImageWithURL:url ];
-    cell.tweetPhoto.layer.cornerRadius = cell.tweetPhoto.frame.size.height /2;
-    cell.tweetPhoto.layer.masksToBounds = YES;
-    cell.tweetPhoto.layer.borderWidth = 0;
-    
-    cell.likeCount.text = [NSString stringWithFormat:@"%i", tweet.favoriteCount];
-    cell.likeCount.font = [cell.likeCount.font fontWithSize:12];
-    cell.retweetCount.text = [NSString stringWithFormat:@"%i", tweet.retweetCount];
-    cell.retweetCount.font = [cell.retweetCount.font fontWithSize:12];
-//    return cell;
-    cell.replyCount.text = [NSString stringWithFormat:@"%i", tweet.replyCount];
-    cell.replyCount.font = [cell.replyCount.font fontWithSize:12];
-    cell.tweetDate.text = [@"." stringByAppendingString:tweet.createdAtString];
-    cell.tweetDate.font = [cell.tweetDate.font fontWithSize:12];
     
     return cell;
 }

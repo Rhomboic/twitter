@@ -13,16 +13,14 @@
 @interface ComposeViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *composeTextView;
 @property (weak, nonatomic) IBOutlet UIImageView *myPhoto;
+@property (weak, nonatomic) IBOutlet UILabel *charCount;
 @property UILabel *placeholderLabel;
 //@property (weak, nonatomic) UIImageView *userPhoto;
 
 @end
 
 @implementation ComposeViewController
-- (IBAction)textViewActive:(id)sender {
-    [self textViewDidChange:_composeTextView];
-    [self textViewDidEndEditing:_composeTextView];
-}
+
 - (IBAction)tweetButton:(UIBarButtonItem *)sender {
     [[APIManager shared]postStatusWithText: self.composeTextView.text completion:^(Tweet *tweet, NSError *error) {
         if(error){
@@ -42,39 +40,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    _placeholderLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 0.0, _composeTextView.frame.size.width - 20.0, 34.0)];
-    [_placeholderLabel setText:@"What's happening"];
-    [_placeholderLabel setBackgroundColor:[UIColor clearColor]];
-//  [_placeholderLabel setFont:[challengeDescription font]];
-    [_placeholderLabel setTextColor:[UIColor lightGrayColor]];
-//  textView is UITextView object you want add placeholder text to
-    
-    
-//    [_userPhoto setImageWithURL: ];
-    [self textViewDidChange:_composeTextView];
-    [self textViewDidEndEditing:_composeTextView];
-//    [_composeTextView addSubview:_placeholderLabel];
+    UIImage *tweetBird = [UIImage imageNamed: @"account-icon"];
+    [self.myPhoto setImage:tweetBird];
 }
-
-- (void) textViewDidChange:(UITextView *)theTextView
-{
-  if(![_composeTextView hasText]) {
-    [_composeTextView addSubview:_placeholderLabel];
-  } else if ([[_composeTextView subviews] containsObject:_placeholderLabel]) {
-    [_placeholderLabel removeFromSuperview];
-  }
-}
-
-- (void)textViewDidEndEditing:(UITextView *)theTextView
-{
-  if (![_composeTextView hasText]) {
-    [_composeTextView addSubview:_placeholderLabel];
-  }
-}
-
-
-
 /*
 #pragma mark - Navigation
 
