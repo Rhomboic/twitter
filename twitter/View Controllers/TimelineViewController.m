@@ -24,7 +24,7 @@
 @property NSMutableArray *arrayOfTweets;
 @end
 
-@implementation TimelineViewController 
+@implementation TimelineViewController
 - (IBAction)didTapLogout:(id)sender {
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
 
@@ -40,8 +40,8 @@
     [super viewDidLoad];
     self.tableView.dataSource = self;
     [self.refreshControl beginRefreshing];
-    
-    
+
+
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchTweets) forControlEvents:(UIControlEventValueChanged)];
 //    [self.activityIndicator setCenter:self.tableView.center];
@@ -52,11 +52,7 @@
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
             NSLog(@"😎😎 Successfully loaded home timeline");
-//            for (Tweet *dictionary in tweets) {
-//                NSLog(@"%@", dictionary.user.name);
-//                
-//            }
-            
+
             self.arrayOfTweets = (NSMutableArray *) tweets;
             [self.tableView reloadData];
             NSLog(@"%lu", (unsigned long)self.arrayOfTweets.count);
@@ -87,23 +83,23 @@
 
 
 //- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    
+//
 //}
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell" forIndexPath:indexPath];
 //    UITableViewCell *cell = [[UITableViewCell alloc] init];
-    
+
     Tweet *tweet = self.arrayOfTweets[indexPath.row];
 
-    
+
 //    NSData *urlData = [NSData dataWithContentsOfURL:url];
-    
+
     cell.tweet = tweet;
-    
+
     [cell refreshTweet];
-    
-    
-    
+
+
+
     return cell;
 }
 
@@ -112,7 +108,7 @@
 }
 - (void)didTweet:(nonnull Tweet *)tweet {
     [self.arrayOfTweets addObject:tweet];
-    
+
     [self.tableView reloadData];
 }
 
