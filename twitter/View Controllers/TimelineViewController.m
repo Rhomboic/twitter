@@ -24,7 +24,7 @@
 @property NSMutableArray *arrayOfTweets;
 @end
 
-@implementation TimelineViewController
+@implementation TimelineViewController 
 - (IBAction)didTapLogout:(id)sender {
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
 
