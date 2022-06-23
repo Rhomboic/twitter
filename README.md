@@ -51,9 +51,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
-
-[Uploading ezgif.com-gif-maker.gif…]()
-gif)
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/74246331/175406967-6ac4f286-e1e6-4a86-9c93-c9fedf01f5dc.gif)
 
 GIF created with [EZGif](https://ezgif.com/).
 
