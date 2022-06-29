@@ -15,7 +15,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *myPhoto;
 @property (weak, nonatomic) IBOutlet UILabel *charCount;
 @property UILabel *placeholderLabel;
-//@property (weak, nonatomic) UIImageView *userPhoto;
 
 @end
 

@@ -23,8 +23,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (weak, nonatomic) IBOutlet UILabel *likeCount;
 @property (weak, nonatomic) IBOutlet UINavigationItem *backButton;
-
-
 @end
 
 @implementation DetailsViewController
@@ -46,24 +44,24 @@
     NSURL *url = [NSURL URLWithString:URLString];
     
     self.tweetName.text = (self.tweet.user.name);
-    self.tweetName.font = [self.tweetName.font fontWithSize:14];
+    self.tweetName.font = [self.tweetName.font fontWithSize:18];
     self.tweetText.text = (self.tweet.text);
-    self.tweetText.font = [self.tweetText.font fontWithSize:12];  self.tweetUsername.text = [@"@" stringByAppendingString: self.tweet.user.screenName];
-    self.tweetUsername.font = [self.tweetText.font fontWithSize:12];
+    self.tweetText.font = [self.tweetText.font fontWithSize:16];  self.tweetUsername.text = [@"@" stringByAppendingString: self.tweet.user.screenName];
+    self.tweetUsername.font = [self.tweetText.font fontWithSize:16];
     
     [self.tweetPhoto setImageWithURL:url ];
     self.tweetPhoto.layer.cornerRadius = self.tweetPhoto.frame.size.height /2;
     self.tweetPhoto.layer.masksToBounds = YES;
     self.tweetPhoto.layer.borderWidth = 0;
-    self.likeCount.text = [NSString stringWithFormat:@"%i", self.tweet.favoriteCount];
-    self.likeCount.font = [self.likeCount.font fontWithSize:12];
-    self.retweetCount.text = [NSString stringWithFormat:@"%i", self.tweet.retweetCount];
-    self.retweetCount.font = [self.retweetCount.font fontWithSize:12];
+    self.likeCount.text = [[NSString stringWithFormat:@"%i", self.tweet.favoriteCount] stringByAppendingString:@"  Likes"];
+    self.likeCount.font = [self.likeCount.font fontWithSize:14];
+    self.retweetCount.text = [[NSString stringWithFormat:@"%i", self.tweet.retweetCount]  stringByAppendingString:@"  Retweets"];
+    self.retweetCount.font = [self.retweetCount.font fontWithSize:14];
 //  selfturn cell;
-    self.replyCount.text = [NSString stringWithFormat:@"%i", self.tweet.replyCount];
-    self.replyCount.font = [self.replyCount.font fontWithSize:12];
+    self.replyCount.text = [[NSString stringWithFormat:@"%i", self.tweet.replyCount]  stringByAppendingString:@"  Replies"];
+    self.replyCount.font = [self.replyCount.font fontWithSize:14];
     self.tweetDate.text = [@"·" stringByAppendingString :self.tweet.createdAtString];
-    self.tweetDate.font = [self.tweetDate.font fontWithSize:12];
+    self.tweetDate.font = [self.tweetDate.font fontWithSize:14];
 }
 
 
@@ -161,7 +159,7 @@
     UIImage *retweetIconGrey = [UIImage imageNamed: @"retweet-icon"];
     [self.retweetButton setImage:retweetIconGrey forState:UIControlStateNormal];
     
-    self.likeCount.text = [NSString stringWithFormat:@"%i", _tweet.favoriteCount];
+    self.likeCount.text = [NSString stringWithFormat:@"%i", _tweet.favoriteCount] ;
     self.likeCount.font = [self.likeCount.font fontWithSize:12];
     self.retweetCount.text = [NSString stringWithFormat:@"%i", _tweet.retweetCount];
     self.retweetCount.font = [self.retweetCount.font fontWithSize:12];

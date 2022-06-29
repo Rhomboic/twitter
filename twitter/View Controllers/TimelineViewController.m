@@ -44,7 +44,6 @@
 
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchTweets) forControlEvents:(UIControlEventValueChanged)];
-//    [self.activityIndicator setCenter:self.tableView.center];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
 }
 
@@ -55,7 +54,9 @@
 
             self.arrayOfTweets = (NSMutableArray *) tweets;
             [self.tableView reloadData];
-            NSLog(@"%lu", (unsigned long)self.arrayOfTweets.count);
+            for (Tweet *t in self.arrayOfTweets){
+                NSLog(@"%@", t.text);
+            }
             [self.refreshControl endRefreshing];
         } else {
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
@@ -64,7 +65,6 @@
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -75,7 +75,6 @@
     } else {
     UITableViewCell *cell = sender;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-//    UINavigationController *navigationController = [segue destinationViewController];
     DetailsViewController *detailsController = [segue destinationViewController];
     detailsController.tweet = self.arrayOfTweets[indexPath.row];
     }
@@ -87,12 +86,8 @@
 //}
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell" forIndexPath:indexPath];
-//    UITableViewCell *cell = [[UITableViewCell alloc] init];
 
     Tweet *tweet = self.arrayOfTweets[indexPath.row];
-
-
-//    NSData *urlData = [NSData dataWithContentsOfURL:url];
 
     cell.tweet = tweet;
 
