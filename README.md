@@ -49,10 +49,9 @@ Please list two areas of the assignment you'd like to **discuss further with you
 2. Getting the current user's user model to be able to set the profile image in the compose view
 
 ## Video Walkthrough
-
 Here's a walkthrough of implemented user stories:
 
-![](https://i.imgur.com/4x1dY7L.gif)
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/74246331/175406967-6ac4f286-e1e6-4a86-9c93-c9fedf01f5dc.gif)
 
 GIF created with [EZGif](https://ezgif.com/).
 
